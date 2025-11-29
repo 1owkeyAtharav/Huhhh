@@ -1,0 +1,234 @@
+/* ---------------- BODY ---------------- */
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    overflow: hidden;
+}
+
+/* ---------------- PAGE CONTAINERS ---------------- */
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+/* ---------------- PAGE 1 ---------------- */
+.page1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1, #fbc2eb);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    z-index: 2;
+}
+
+@keyframes gradientBG {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+.sparkles span {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: sparkleFloat 3s infinite;
+}
+
+@keyframes sparkleFloat {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+    50% { transform: translate(50px, -50px) scale(1.5); opacity: 0.4; }
+    100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+}
+
+.title {
+    font-size: 40px;
+    text-align: center;
+    color: #c734a3;
+    text-shadow: 0 0 10px #000000, 0 0 20px #000000;
+    animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+    0%,100% {text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493;}
+    50% {text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493;}
+}
+.btn:hover::after {
+    content: "✨";
+    position: absolute;
+    font-size: 24px;
+    animation: sparkleTrail 1s forwards;
+}
+@keyframes sparkleTrail {
+    0% { opacity: 1; transform: translate(0,0) scale(1); }
+    100% { opacity: 0; transform: translate(50px,-50px) scale(0.5); }
+}
+.btn:active {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+.btn {
+      opacity: 0;  
+    margin-top: 30px;
+    font-size: 24px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(45deg,#ff1493,#ff69b4);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ff69b4;
+ animation: fadeInBtn 1s forwards;
+    animation-delay: 9s;       /* delay in seconds */
+    transition: transform 0.3s;
+}
+@keyframes fadeInBtn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+T
+.btn:hover {transform: scale(1.1);}
+
+@keyframes pulse {
+    0%,100%{box-shadow:0 0 15px #ff69b4}
+    50%{box-shadow:0 0 25px #ff1493}
+}
+.birthday-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    color: #ff4fa3;        /* bright pink */
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.birthday-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    color: #6b456e;       /* soft purple-grey */
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* ---------------- HEART TUNNEL ---------------- */
+.heart-tunnel {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('ab.webp');
+    background-size: cover;
+    animation: zoom 15s infinite linear;
+    opacity: 0.2;
+}
+
+@keyframes zoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(3); }
+}
+
+/* ---------------- FLOATING HEARTS ---------------- */
+.floating-hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.floating-hearts span {
+    position: absolute;
+    font-size: 20px;
+    color: #ff69b4;
+    animation: float 5s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
+    100% { transform: translateY(-50px) translateX(50px) rotate(360deg); }
+}
+
+/* ---------------- PAGE 2 ---------------- */
+.page2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(135deg, #ffe6f0, #fff1cc);
+    opacity: 0;
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+/* ---------------- GREETING CARD ---------------- */
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 80%;
+    max-width: 900px;
+    height: 60%;
+    background: linear-gradient(145deg, #ffffff, #ffe6f0);
+    display: flex;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Card pop-in */
+.page2.show .card {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Card sections */
+.left, .right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.right {
+    border-left: 2px dashed rgba(255, 20, 147, 0.2);
+}
+
+/* Images */
+.image, .cake {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 80%;
+    transition: transform 0.3s;
+}
+.image:hover, .cake:hover {transform: scale(1.05);}
+
+/* Wish text */
+.wish {
+    margin-top: 15px;
+    font-size: 22px;
+    color: #ff1493;
+    text-align: center;
+    line-height: 1.5;
+    font-weight: 500;
+    padding: 0 10px;
+    opacity: 0; /* start hidden */
+    text-shadow: 0 0 5px #ff69b4;
+}
+
+@keyframes fadeInText {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}

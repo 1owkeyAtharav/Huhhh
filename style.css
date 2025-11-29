@@ -184,9 +184,10 @@ body {
 .heart-tunnel {
     position: fixed;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background: url('ab.webp');
     background-size: cover;
+    background-position: center;
     animation: zoom 15s infinite linear;
     opacity: 0.2;
 }

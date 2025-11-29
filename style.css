@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
-    overflow: hidden;
+    overflow-x: hidden; /* prevent horizontal scroll */
 }
 
 /* ---------------- PAGE CONTAINERS ---------------- */
@@ -32,6 +32,8 @@ body {
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
 }
+
+/* Sparkles */
 .sparkles span {
     position: absolute;
     width: 6px;
@@ -48,8 +50,9 @@ body {
     100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
 }
 
+/* Title */
 .title {
-    font-size: 40px;
+    font-size: clamp(30px, 8vw, 60px);
     text-align: center;
     color: #c734a3;
     text-shadow: 0 0 10px #000000, 0 0 20px #000000;
@@ -60,24 +63,12 @@ body {
     0%,100% {text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493;}
     50% {text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493;}
 }
-.btn:hover::after {
-    content: "✨";
-    position: absolute;
-    font-size: 24px;
-    animation: sparkleTrail 1s forwards;
-}
-@keyframes sparkleTrail {
-    0% { opacity: 1; transform: translate(0,0) scale(1); }
-    100% { opacity: 0; transform: translate(50px,-50px) scale(0.5); }
-}
-.btn:active {
-    transform: scale(1.2) rotate(-5deg);
-}
 
+/* Button animations */
 .btn {
-      opacity: 0;  
+    opacity: 0;  
     margin-top: 30px;
-    font-size: 24px;
+    font-size: clamp(16px, 4vw, 24px);
     padding: 12px 25px;
     border: none;
     border-radius: 15px;
@@ -85,35 +76,106 @@ body {
     color: white;
     cursor: pointer;
     box-shadow: 0 0 15px #ff69b4;
- animation: fadeInBtn 1s forwards;
-    animation-delay: 9s;       /* delay in seconds */
+    animation: fadeInBtn 1s forwards;
+    animation-delay: 9s;       /* delayed appearance */
     transition: transform 0.3s;
+    position: relative;
+    z-index: 3;
 }
+
 @keyframes fadeInBtn {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
 }
-T
-.btn:hover {transform: scale(1.1);}
 
-@keyframes pulse {
-    0%,100%{box-shadow:0 0 15px #ff69b4}
-    50%{box-shadow:0 0 25px #ff1493}
+.btn:hover { transform: scale(1.1); }
+.btn:active { transform: scale(1.2) rotate(-5deg); }
+
+.btn:hover::after {
+    content: "✨";
+    position: absolute;
+    font-size: 24px;
+    animation: sparkleTrail 1s forwards;
 }
+
+@keyframes sparkleTrail {
+    0% { opacity: 1; transform: translate(0,0) scale(1); }
+    100% { opacity: 0; transform: translate(50px,-50px) scale(0.5); }
+}
+
+/* ---------------- PAGE 2 ---------------- */
+.page2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(135deg, #ffe6f0, #fff1cc);
+    opacity: 0;
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+/* ---------------- GREETING CARD ---------------- */
+.card {
+    position: relative; /* relative for mobile-friendly layout */
+    width: 90%;
+    max-width: 900px;
+    height: auto;
+    background: linear-gradient(145deg, #ffffff, #ffe6f0);
+    display: flex;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+    flex-wrap: wrap; /* allow wrapping on small screens */
+}
+
+/* Card pop-in */
+.page2.show .card {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Card sections */
+.left, .right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.right {
+    border-left: 2px dashed rgba(255, 20, 147, 0.2);
+}
+
+/* Images */
+.image, .cake {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 80%;
+    max-width: 300px;
+    transition: transform 0.3s;
+}
+
+.image:hover, .cake:hover { transform: scale(1.05); }
+
+/* Birthday text */
 .birthday-title {
     font-family: 'Pacifico', cursive;
-    font-size: 40px;
-    color: #ff4fa3;        /* bright pink */
+    font-size: clamp(24px, 6vw, 40px);
+    color: #ff4fa3;
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0;
     line-height: 1.3;
 }
 
 .birthday-subtitle {
     font-family: 'Poppins', sans-serif;
-    font-size: 22px;
-    color: #6b456e;       /* soft purple-grey */
+    font-size: clamp(16px, 4vw, 22px);
+    color: #6b456e;
     text-align: center;
     margin-top: 5px;
 }
@@ -145,7 +207,7 @@ T
 
 .floating-hearts span {
     position: absolute;
-    font-size: 20px;
+    font-size: clamp(12px, 4vw, 20px);
     color: #ff69b4;
     animation: float 5s linear infinite;
     opacity: 0.7;
@@ -156,79 +218,42 @@ T
     100% { transform: translateY(-50px) translateX(50px) rotate(360deg); }
 }
 
-/* ---------------- PAGE 2 ---------------- */
-.page2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background: linear-gradient(135deg, #ffe6f0, #fff1cc);
-    opacity: 0;
-    transform: scale(1.1);
-    z-index: 1;
-}
-
-/* ---------------- GREETING CARD ---------------- */
-.card {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 80%;
-    max-width: 900px;
-    height: 60%;
-    background: linear-gradient(145deg, #ffffff, #ffe6f0);
-    display: flex;
-    border-radius: 25px;
-    overflow: hidden;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    opacity: 0;
-    transition: opacity 1s ease, transform 1s ease;
-}
-
-/* Card pop-in */
-.page2.show .card {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* Card sections */
-.left, .right {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.right {
-    border-left: 2px dashed rgba(255, 20, 147, 0.2);
-}
-
-/* Images */
-.image, .cake {
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    width: 80%;
-    transition: transform 0.3s;
-}
-.image:hover, .cake:hover {transform: scale(1.05);}
-
-/* Wish text */
+/* ---------------- WISH TEXT ---------------- */
 .wish {
     margin-top: 15px;
-    font-size: 22px;
+    font-size: clamp(16px, 4vw, 22px);
     color: #ff1493;
     text-align: center;
     line-height: 1.5;
     font-weight: 500;
     padding: 0 10px;
-    opacity: 0; /* start hidden */
+    opacity: 0;
     text-shadow: 0 0 5px #ff69b4;
 }
 
 @keyframes fadeInText {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------- MEDIA QUERIES ---------------- */
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .left, .right {
+        width: 100%;
+        padding: 10px;
+        border-left: none;
+        border-top: 2px dashed rgba(255, 20, 147, 0.2);
+    }
+    .image, .cake {
+        width: 100%;
+        max-width: 250px;
+    }
+    .btn {
+        font-size: clamp(16px, 5vw, 22px);
+        padding: 10px 20px;
+    }
 }
